@@ -342,7 +342,7 @@ export default class i18nTransform extends Transform {
   getCatalog(path) {
     try {
       let content
-      if (path.endsWith('yml')) {
+      if (path.endsWith('yml') || path.endsWith('yaml')) {
         content = yaml.load(fs.readFileSync(path).toString())
       } else {
         content = JSON.parse(fs.readFileSync(path))
@@ -359,7 +359,7 @@ export default class i18nTransform extends Transform {
 
   pushFile(path, contents) {
     let text
-    if (path.endsWith('yml')) {
+    if (path.endsWith('yml') || path.endsWith('yaml')) {
       text = yaml.dump(contents, {
         indent: this.options.indentation,
         ...this.options.yamlOptions,
